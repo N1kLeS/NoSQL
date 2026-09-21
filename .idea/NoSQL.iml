@@ -33,5 +33,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.12.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:6.2.19" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:3.0.2" level="project" />
   </component>
 </module>

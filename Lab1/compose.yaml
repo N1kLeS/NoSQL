@@ -1,0 +1,13 @@
+services:
+  riak:
+    image: kefirgames/riak:2.9.2
+    platform: linux/amd64
+    container_name: lab1-riak
+    ports:
+      - "8098:8098"
+      - "8087:8087"
+    healthcheck:
+      test: ["CMD", "riak", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
