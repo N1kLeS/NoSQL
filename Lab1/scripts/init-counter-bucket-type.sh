@@ -2,7 +2,7 @@
 
 set -eu
 
-container_name="${RIAK_CONTAINER_NAME:-lab1-riak}"
+container_name="${RIAK_CONTAINER_NAME:-lab1-riak1}"
 bucket_type="page-visit-counters"
 
 status_output=$(docker exec "$container_name" riak-admin bucket-type status "$bucket_type" 2>&1 || true)

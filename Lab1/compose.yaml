@@ -1,11 +1,58 @@
 services:
-  riak:
+  riak1:
     image: kefirgames/riak:2.9.2
     platform: linux/amd64
-    container_name: lab1-riak
+    container_name: lab1-riak1
+    hostname: riak1.local
+    environment:
+      RIAK_NODENAME: riak
+      RIAK_NODE_HOST: riak1.local
+      RIAK_COOKIE: lab1-riak-cluster
+    volumes:
+      - ./docker/riak/cluster-nodename.sh:/etc/riak/prestart.d/zz-cluster-nodename.sh:ro
     ports:
       - "8098:8098"
       - "8087:8087"
+    healthcheck:
+      test: ["CMD", "riak", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  riak2:
+    image: kefirgames/riak:2.9.2
+    platform: linux/amd64
+    container_name: lab1-riak2
+    hostname: riak2.local
+    environment:
+      RIAK_NODENAME: riak
+      RIAK_NODE_HOST: riak2.local
+      RIAK_COOKIE: lab1-riak-cluster
+    volumes:
+      - ./docker/riak/cluster-nodename.sh:/etc/riak/prestart.d/zz-cluster-nodename.sh:ro
+    ports:
+      - "8099:8098"
+      - "8088:8087"
+    healthcheck:
+      test: ["CMD", "riak", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  riak3:
+    image: kefirgames/riak:2.9.2
+    platform: linux/amd64
+    container_name: lab1-riak3
+    hostname: riak3.local
+    environment:
+      RIAK_NODENAME: riak
+      RIAK_NODE_HOST: riak3.local
+      RIAK_COOKIE: lab1-riak-cluster
+    volumes:
+      - ./docker/riak/cluster-nodename.sh:/etc/riak/prestart.d/zz-cluster-nodename.sh:ro
+    ports:
+      - "8100:8098"
+      - "8089:8087"
     healthcheck:
       test: ["CMD", "riak", "ping"]
       interval: 10s
