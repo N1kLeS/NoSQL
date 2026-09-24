@@ -13,14 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import ru.nikles.lab1.counter.PageVisitCounterService;
+
 @RestController
 @RequestMapping("/api/users/{userId}/actions")
 public class UserActionController {
 
     private final UserActionService actionService;
+    private final PageVisitCounterService counterService;
 
-    public UserActionController(UserActionService actionService) {
+    public UserActionController(UserActionService actionService,
+                                PageVisitCounterService counterService) {
         this.actionService = actionService;
+        this.counterService = counterService;
     }
 
     @PostMapping
@@ -32,6 +37,8 @@ public class UserActionController {
 
     @GetMapping
     public List<UserAction> findHistory(@PathVariable String userId) {
-        return actionService.findHistory(userId);
+        List<UserAction> history = actionService.findHistory(userId);
+        counterService.incrementUserHistoryPage();
+        return history;
     }
 }
