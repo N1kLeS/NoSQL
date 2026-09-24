@@ -10,6 +10,7 @@ services:
       RIAK_COOKIE: lab1-riak-cluster
     volumes:
       - ./docker/riak/cluster-nodename.sh:/etc/riak/prestart.d/zz-cluster-nodename.sh:ro
+      - riak1-data:/var/lib/riak
     ports:
       - "8098:8098"
       - "8087:8087"
@@ -30,6 +31,7 @@ services:
       RIAK_COOKIE: lab1-riak-cluster
     volumes:
       - ./docker/riak/cluster-nodename.sh:/etc/riak/prestart.d/zz-cluster-nodename.sh:ro
+      - riak2-data:/var/lib/riak
     ports:
       - "8099:8098"
       - "8088:8087"
@@ -50,6 +52,7 @@ services:
       RIAK_COOKIE: lab1-riak-cluster
     volumes:
       - ./docker/riak/cluster-nodename.sh:/etc/riak/prestart.d/zz-cluster-nodename.sh:ro
+      - riak3-data:/var/lib/riak
     ports:
       - "8100:8098"
       - "8089:8087"
@@ -58,3 +61,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 12
+
+volumes:
+  riak1-data:
+    name: lab1-riak1-data
+  riak2-data:
+    name: lab1-riak2-data
+  riak3-data:
+    name: lab1-riak3-data
