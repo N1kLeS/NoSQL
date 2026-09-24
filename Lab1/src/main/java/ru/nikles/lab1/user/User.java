@@ -12,6 +12,14 @@ public record User(
 
         @NotBlank(message = "Email пользователя обязателен")
         @Email(message = "Email пользователя имеет неверный формат")
-        String email
+        String email,
+
+        NotificationSettings notificationSettings
 ) {
+
+    public User {
+        if (notificationSettings == null) {
+            notificationSettings = NotificationSettings.disabled();
+        }
+    }
 }
